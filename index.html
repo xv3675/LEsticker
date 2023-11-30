@@ -39,8 +39,10 @@
 <body>
     <!-- 이미지 파일을 업로드할 input 추가 -->
     <input type="file" id="imageUpload" accept="image/*">
+    <input type="text" id="imageSource" name="imageSource" placeholder="이미지 소스 코드 입력">
     <div id="imageContainer"></div>
     <textarea id="imageTagOutput" rows="4" readonly></textarea>
+    <button onclick="generateImage()">이미지 생성</button>
     <button onclick="copyToClipboard()">결과 복사</button>
 
     <script>
@@ -48,22 +50,27 @@
             return `<img src="${src}" width="200" height="200" alt="이미지">`;
         }
 
-        document.getElementById('imageUpload').addEventListener('change', function() {
-            const file = this.files[0]; // 선택한 파일 가져오기
-            const reader = new FileReader();
+        function generateImage() {
+            const file = document.getElementById('imageUpload').files[0];
+            const sourceCode = document.getElementById('imageSource').value;
 
-            reader.onload = function(event) {
-                const imageUrl = event.target.result; // 이미지 파일의 주소를 가져와서
-                const imageTag = createImageTag(imageUrl); // 이미지 태그를 생성하고
-                document.getElementById('imageContainer').innerHTML = imageTag; // 이미지를 표시할 곳에 이미지 태그 삽입
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const imageUrl = event.target.result;
+                    displayImage(imageUrl);
+                };
+                reader.readAsDataURL(file);
+            } else if (sourceCode.trim() !== '') {
+                displayImage(sourceCode);
+            }
+        }
 
-                // 이미지 태그를 textarea에 출력
-                const imageTagText = `<img src="${imageUrl}" width="200" height="200" alt="이미지">`;
-                document.getElementById('imageTagOutput').value = imageTagText;
-            };
-
-            reader.readAsDataURL(file); // 파일을 읽어 이미지로 변환
-        });
+        function displayImage(src) {
+            const imageTag = createImageTag(src);
+            document.getElementById('imageContainer').innerHTML = imageTag;
+            document.getElementById('imageTagOutput').value = `<img src="${src}" width="200" height="200" alt="이미지">`;
+        }
 
         function copyToClipboard() {
             const textarea = document.getElementById('imageTagOutput');
