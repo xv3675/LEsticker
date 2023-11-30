@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Image Tag Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #imageSource {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #imageContainer {
+            max-width: 100%;
+            margin-bottom: 10px;
+        }
+
+        #imageTagOutput {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <!-- 이미지 소스코드를 입력할 input 추가 -->
+    <label for="imageSource">이미지 소스 코드:</label>
+    <input type="text" id="imageSource" name="imageSource">
+    <button onclick="displayImage()">이미지 출력</button>
+
+    <div id="imageContainer"></div>
+    <textarea id="imageTagOutput" rows="4" readonly></textarea>
+    <button onclick="copyToClipboard()">결과 복사</button>
+
+    <script>
+        function createImageTag(src) {
+            return `<img src="${src}" width="200" height="200" alt="이미지">`;
+        }
+
+        function displayImage() {
+            const imageUrl = document.getElementById('imageSource').value; // 입력된 이미지 소스코드 가져오기
+
+            // 이미지 태그 생성 및 표시
+            const imageTag = createImageTag(imageUrl);
+            document.getElementById('imageContainer').innerHTML = imageTag;
+
+            // 이미지 태그를 textarea에 출력
+            const imageTagText = `<img src="${imageUrl}" width="200" height="200" alt="이미지">`;
+            document.getElementById('imageTagOutput').value = imageTagText;
+        }
+
+        function copyToClipboard() {
+            const textarea = document.getElementById('imageTagOutput');
+            textarea.select();
+            document.execCommand('copy');
+            alert('결과가 복사되었습니다!');
+        }
+    </script>
+</body>
+</html>
