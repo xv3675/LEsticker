@@ -2,9 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>LESticker</title>
+  <title>LESticker Collection</title>
   <style>
     /* CSS 스타일링 */
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
     .grid-container {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -15,14 +30,31 @@
       height: auto;
       cursor: pointer;
     }
+    .credits {
+      font-size: 14px;
+      color: #555;
+    }
   </style>
 </head>
 <body>
-  <div class="grid-container" id="imageGrid">
-    <!-- JavaScript로 이미지 및 텍스트 추가 -->
+  <div class="container">
+    <div class="box">
+      <h1 id="title">LESticker Collection</h1>
+      <p id="creator">Created by [Your Name]</p>
+      <div class="grid-container" id="imageGrid">
+        <!-- JavaScript로 이미지 및 텍스트 추가 -->
+      </div>
+    </div>
+    <div class="credits">
+      <p>Site made by 비니루봉다리</p>
+    </div>
   </div>
 
   <script>
+    // 제목, 제작자 정보
+    const title = '국힙 이모티콘';
+    const creator = 'Created by 비니루봉다리';
+
     // 이미지 및 텍스트 정보
     const images = [
       '1.jpg',
@@ -43,28 +75,34 @@
       // 나머지 이미지 경로 추가
     ];
 
+    const baseUrl = 'https://hiphople.com';
     const texts = [
-      '<img src="https://hiphople.com/files/attach/images/2531590/584/026/027/51a6352b4604cc151ba5f8120222de95.jpg" style="width:130px;height:130px;" alt="">',
-      '<img src="https://hiphople.com/files/attach/images/2531590/584/026/027/87c518c4f2a08ef062ba3cf28778c144.jpg" style="width:130px;height:130px;" alt="">',
-      '<img src="https://hiphople.com/files/attach/images/2531590/584/026/027/cefd189b0f1a29a2f2e81fb9df171788.jpg" style="width:130px;height:130px;" alt="">',
-      '<img src="https://hiphople.com/files/attach/images/2531590/584/026/027/8add278b87881c4bffff91663bddd971.jpg" style="width:130px;height:130px;" alt="">',
-      '<img src="https://hiphople.com/files/attach/images/2531590/584/026/027/8dafdba07094cdf7153e4086246bc6f6.jpg" style="width:130px;height:130px;" alt="">',
-      '<img src="https://hiphople.com/files/attach/images/2531590/584/026/027/f66b270ea9702a6a63ca6d41069be218.jpg" style="width:130px;height:130px;" alt="">',
-      '<img src="https://hiphople.com/files/attach/images/2531590/584/026/027/7354860f6c194acaa295bc2f4d375894.jpg" style="width:130px;height:130px;" alt="">',
-      '<img src="https://hiphople.com/files/attach/images/2531590/696/026/027/e47ae9be2b20bcd6f9f1978ea8bf98c0.jpg" style="width:130px;height:130px;" alt="">',
-      '<img src="https://hiphople.com/files/attach/images/2531590/696/026/027/cc84defe66c48ecb036f6cd7c8c935fa.jpg" style="width:130px;height:130px;" alt="">',
-      '<img src="https://hiphople.com/files/attach/images/2531590/696/026/027/f51cce22a1d047cc9360c94c53200cae.jpg" style="width:130px;height:130px;" alt="">',
-      '<img src="https://hiphople.com/files/attach/images/2531590/696/026/027/ad004fdf504d654a616b6950a0d5900a.jpg" style="width:130px;height:130px;" alt="">',
-      '<img src="https://hiphople.com/files/attach/images/2531590/696/026/027/53afc247acda432e951b5f74fccb9457.jpg" style="width:130px;height:130px;" alt="">',
-      '<img src="https://hiphople.com/files/attach/images/2531590/696/026/027/45835295c771063984a48bcf92fcf0fe.png" style="width:130px;height:130px;" alt="">',
-      '<img src="https://hiphople.com/files/attach/images/2531590/710/026/027/c937f52631a33ad23ac0898fca75e24f.jpg" style="width:130px;height:130px;" alt="">',
-      '<img src="https://hiphople.com/files/attach/images/2531590/710/026/027/26034c711d7319f2d6b5b98358691b70.jpg" style="width:130px;height:130px;" alt="">',
+      `${baseUrl}/files/attach/images/2531590/584/026/027/51a6352b4604cc151ba5f8120222de95.jpg`,
+      `${baseUrl}/files/attach/images/2531590/584/026/027/87c518c4f2a08ef062ba3cf28778c144.jpg`,
+      `${baseUrl}/files/attach/images/2531590/584/026/027/cefd189b0f1a29a2f2e81fb9df171788.jpg`,
+      `${baseUrl}/files/attach/images/2531590/584/026/027/8add278b87881c4bffff91663bddd971.jpg`,
+      `${baseUrl}/files/attach/images/2531590/584/026/027/8dafdba07094cdf7153e4086246bc6f6.jpg`,
+      `${baseUrl}/files/attach/images/2531590/584/026/027/f66b270ea9702a6a63ca6d41069be218.jpg`,
+      `${baseUrl}/files/attach/images/2531590/584/026/027/7354860f6c194acaa295bc2f4d375894.jpg`,
+      `${baseUrl}/files/attach/images/2531590/696/026/027/e47ae9be2b20bcd6f9f1978ea8bf98c0.jpg`,
+      `${baseUrl}/files/attach/images/2531590/696/026/027/cc84defe66c48ecb036f6cd7c8c935fa.jpg`,
+      `${baseUrl}/files/attach/images/2531590/696/026/027/f51cce22a1d047cc9360c94c53200cae.jpg`,
+      `${baseUrl}/files/attach/images/2531590/696/026/027/ad004fdf504d654a616b6950a0d5900a.jpg`,
+      `${baseUrl}/files/attach/images/2531590/696/026/027/53afc247acda432e951b5f74fccb9457.jpg`,
+      `${baseUrl}/files/attach/images/2531590/696/026/027/45835295c771063984a48bcf92fcf0fe.png`,
+      `${baseUrl}/files/attach/images/2531590/710/026/027/c937f52631a33ad23ac0898fca75e24f.jpg`,
+      `${baseUrl}/files/attach/images/2531590/710/026/027/26034c711d7319f2d6b5b98358691b70.jpg`,
       // 나머지 텍스트 추가
     ];
 
     // 이미지와 텍스트를 동적으로 추가하는 함수
     function createImageGrid() {
       const imageGrid = document.getElementById('imageGrid');
+      const titleElement = document.getElementById('title');
+      const creatorElement = document.getElementById('creator');
+
+      titleElement.textContent = title;
+      creatorElement.textContent = creator;
 
       for (let i = 0; i < images.length; i++) {
         const gridItem = document.createElement('div');
