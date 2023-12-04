@@ -26,8 +26,8 @@
       gap: 5px;
     }
     .grid-item img {
-      width: 130px;
-      height: 130px;
+      width: 100%;
+      height: auto;
       cursor: pointer;
     }
     .credits {
@@ -64,13 +64,70 @@
   </div>
 
   <script>
-    // 이미지와 텍스트 정보 - 첫 번째 box
-    const images1 = Array.from({ length: 15 }, (_, index) => `${index + 1}.jpg`);
-    const texts1 = images1.map(image => `<img src="${image}" width="130" height="130">`);
+    // 첫 번째 box의 이미지 및 텍스트 정보
+    const images1 = [
+      '1.jpg',
+      '2.jpg',
+      '3.jpg',
+      '4.jpg',
+      '5.jpg',
+      '6.jpg',
+      '7.jpg',
+      '8.jpg',
+      '9.jpg',
+      '10.jpg',
+      '11.jpg',
+      '12.jpg',
+      '13.jpg',
+      '14.jpg',
+      '15.jpg'
+      // 추가 이미지 경로
+    ];
+    const baseUrl = 'https://hiphople.com';
+    const texts1 = [
+          `${baseUrl}/files/attach/images/2531590/584/026/027/51a6352b4604cc151ba5f8120222de95.jpg`,
+          `${baseUrl}/files/attach/images/2531590/584/026/027/87c518c4f2a08ef062ba3cf28778c144.jpg`,
+          `${baseUrl}/files/attach/images/2531590/584/026/027/cefd189b0f1a29a2f2e81fb9df171788.jpg`,
+          `${baseUrl}/files/attach/images/2531590/584/026/027/8add278b87881c4bffff91663bddd971.jpg`,
+          `${baseUrl}/files/attach/images/2531590/584/026/027/8dafdba07094cdf7153e4086246bc6f6.jpg`,
+          `${baseUrl}/files/attach/images/2531590/584/026/027/f66b270ea9702a6a63ca6d41069be218.jpg`,
+          `${baseUrl}/files/attach/images/2531590/584/026/027/7354860f6c194acaa295bc2f4d375894.jpg`,
+          `${baseUrl}/files/attach/images/2531590/696/026/027/e47ae9be2b20bcd6f9f1978ea8bf98c0.jpg`,
+          `${baseUrl}/files/attach/images/2531590/696/026/027/cc84defe66c48ecb036f6cd7c8c935fa.jpg`,
+          `${baseUrl}/files/attach/images/2531590/696/026/027/f51cce22a1d047cc9360c94c53200cae.jpg`,
+          `${baseUrl}/files/attach/images/2531590/696/026/027/ad004fdf504d654a616b6950a0d5900a.jpg`,
+          `${baseUrl}/files/attach/images/2531590/696/026/027/53afc247acda432e951b5f74fccb9457.jpg`,
+          `${baseUrl}/files/attach/images/2531590/696/026/027/45835295c771063984a48bcf92fcf0fe.png`,
+          `${baseUrl}/files/attach/images/2531590/710/026/027/c937f52631a33ad23ac0898fca75e24f.jpg`,
+          `${baseUrl}/files/attach/images/2531590/710/026/027/26034c711d7319f2d6b5b98358691b70.jpg`,
+          // 나머지 텍스트 추가
+        ];
 
-    // 두 번째 box의 이미지와 텍스트 정보
-    const images2 = Array.from({ length: 15 }, (_, index) => `${index + 16}.jpg`);
-    const texts2 = images2.map(image => `<img src="${image}" width="130" height="130">`);
+
+    // 두 번째 box의 이미지 및 텍스트 정보
+    const images2 = [
+            '1.jpg',
+            '2.jpg',
+            '3.jpg',
+            '4.jpg',
+            '5.jpg',
+            '6.jpg',
+            '7.jpg',
+            '8.jpg',
+            '9.jpg',
+            '10.jpg',
+            '11.jpg',
+            '12.jpg',
+            '13.jpg',
+            '14.jpg',
+            '15.jpg',
+    ];
+    const texts2 = [
+      'text4',
+      'text5',
+      'text6',
+      // 추가 텍스트
+    ];
 
     // 첫 번째 box의 이미지와 텍스트를 동적으로 추가하는 함수
     function createImageGrid1() {
