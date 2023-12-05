@@ -165,7 +165,7 @@
 
     // 텍스트 복사 함수
     function copyText(text) {
-    const imageTag = `<img src="${text}" border-radius="5px" width="130px" height="130px">`;
+    const imageTag = `<img src="${text}" style="border-radius:5px;" width="130px" height="130px">`;
 
     navigator.clipboard.writeText(imageTag)
       .then(() => {
