@@ -40,8 +40,8 @@
   <div class="container">
     <!-- 첫 번째 box -->
     <div class="box">
-      <h1 id="title1">LESticker Collection 1</h1>
-      <p id="creator1">Created by [Your Name]</p>
+      <h1 id="title1">국내 힙합 스티커</h1>
+      <p id="creator1">Created by 비니루봉다리</p>
       <div class="grid-container" id="imageGrid1">
         <!-- 이미지와 텍스트 추가 -->
       </div>
@@ -49,8 +49,8 @@
 
     <!-- 두 번째 box -->
     <div class="box">
-      <h1 id="title2">LESticker Collection 2</h1>
-      <p id="creator2">Created by [Your Name]</p>
+      <h1 id="title2">외국 힙합 스티커</h1>
+      <p id="creator2">Created by 비니루봉다리</p>
       <div class="grid-container" id="imageGrid2">
         <!-- 이미지와 텍스트 추가 -->
       </div>
@@ -59,7 +59,7 @@
     <!-- 추가적인 박스들... -->
 
     <div class="credits">
-      <p>Site made by 비니루봉다리</p>
+      <p>괜찮은 유저 제작 스티커 제보 원함.</p>
     </div>
   </div>
 
@@ -187,16 +187,18 @@
 
     // 텍스트 복사 함수
     function copyText(text) {
-      navigator.clipboard.writeText(text)
-        .then(() => {
-          console.log('Text copied:', text);
-          alert('Text copied: ' + text);
-        })
-        .catch(err => {
-          console.error('Error in copying text: ', err);
-          alert('Error in copying text');
-        });
-    }
+    const imageTag = `<img src="${text}" width="130px" height="130px">`;
+
+    navigator.clipboard.writeText(imageTag)
+      .then(() => {
+        console.log('Text copied:', imageTag);
+        alert('Text copied: ' + imageTag);
+      })
+      .catch(err => {
+        console.error('Error in copying text: ', err);
+        alert('Error in copying text');
+      });
+  }
   </script>
 </body>
 </html>
