@@ -44,6 +44,7 @@
     .header-creator {
       color: #555;
       cursor: pointer;
+      font-size: 20px;
     }
 
     .header-creator:hover {
@@ -76,6 +77,16 @@
       color: gray;
       text-align: center;
     }
+
+    .credits a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .credits a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -83,6 +94,7 @@
     <div class="credits">
       <p>양질의 유저 제작 스티커 제보해주시면 시간나는대로 업데이트하겠습니다.</p>
       <a href="https://hiphople.com/kboard/27064796?page=2">사용법</a>
+      <a href="mailto:younghalbae99@gmail.com">스티커 제보</a>
     </div>
   </div>
 
@@ -96,7 +108,6 @@
         link: 'https://anothercreatorlink.com',
         name: '비니루봉다리',
       },
-      // íìí ë§í¼ ë ì¶ê°
     };
 
     function generateImageUrls(base, start, end) {
@@ -108,7 +119,7 @@
 
       const boxElement = document.createElement('div');
       boxElement.classList.add('box');
-      
+
       const headerElement = document.createElement('div');
       headerElement.classList.add('header');
 
@@ -119,7 +130,10 @@
       const headerCreator = document.createElement('div');
       headerCreator.classList.add('header-creator');
       headerCreator.textContent = `by ${creator.name}`;
-      headerCreator.addEventListener('click', () => window.location.href = creator.link);
+      headerCreator.addEventListener('click', (event) => {
+        event.stopPropagation();
+        window.location.href = creator.link;
+      });
 
       headerElement.appendChild(headerTitle);
       headerElement.appendChild(headerCreator);
@@ -146,8 +160,8 @@
       boxElement.appendChild(imageGrid);
       containerElement.appendChild(boxElement);
 
-      headerTitle.addEventListener('click', () => toggleGridVisibility(imageGrid));
-      headerCreator.addEventListener('click', () => toggleGridVisibility(imageGrid));
+      headerTitle.addEventListener('click', () => toggleGridVisibility(imageGrid, headerCreator));
+      headerCreator.addEventListener('click', () => toggleGridVisibility(imageGrid, headerTitle));
     }
 
     function copyText(text) {
@@ -158,12 +172,12 @@
         .catch(() => alert('Error in copying text'));
     }
 
-    function toggleGridVisibility(grid) {
+    function toggleGridVisibility(grid, header) {
       const isGridVisible = grid.style.maxHeight !== '0px';
       grid.style.maxHeight = isGridVisible ? '0px' : `${grid.scrollHeight}px`;
+      header.style.textDecoration = isGridVisible ? 'underline' : 'none';
     }
 
-    // ì¬ì© ìì
     createImageGrid('container', 1, 20, '국내힙합 스티커1', creators.creator1);
     createImageGrid('container', 21, 7, '국내힙합 스티커2', creators.creator1);
     createImageGrid('container', 101, 8, '외국힙합 스티커1', creators.creator1);
