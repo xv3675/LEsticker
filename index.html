@@ -61,16 +61,14 @@
     for (let i = 1; i <= 27; i++) {
       images1.push(`https://lesticker.netlify.app/${i}.jpg`);
     }
-    const texts1 = [
-      // Add more text entries
-    ];
+    const texts1 = Array.from({ length: 27 }, (_, i) => `https://lesticker.netlify.app/${i + 1}.jpg`);
+    
     const images2 = [];
     for (let i = 101; i <= 110; i++) {
       images2.push(`https://lesticker.netlify.app/${i}.jpg`);
     }
-    const texts2 = [
-      // Add more text entries
-    ];
+    const texts2 = Array.from({ length: 10 }, (_, i) => `https://lesticker.netlify.app/${i + 101}.jpg`);
+    
     function createImageGrid1() {
       const imageGrid = document.getElementById('imageGrid1');
       const titleElement = document.getElementById('title1');
