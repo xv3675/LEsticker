@@ -27,6 +27,9 @@
       font-weight: bold;
       cursor: pointer;
       user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .header:hover {
@@ -40,6 +43,7 @@
     .header-creator {
       font-size: 20px;
       color: #555;
+      cursor: pointer;
     }
 
     .header a {
@@ -100,7 +104,10 @@
       const headerCreator = document.createElement('div');
       headerCreator.classList.add('header-creator');
       headerCreator.textContent = `by ${creator}`;
-      headerCreator.href = creatorLink;
+      headerCreator.addEventListener('click', function(event) {
+        event.stopPropagation();
+        window.location.href = creatorLink;
+      });
 
       headerElement.appendChild(headerTitle);
       headerElement.appendChild(headerCreator);
