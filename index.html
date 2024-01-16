@@ -4,6 +4,20 @@
   <meta charset="UTF-8">
   <title>힙합LE 스티커 컬렉션</title>
   <style>
+    @font-face {
+      font-family: 'TheJamsil5Bold';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'TAEBAEKfont';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/TAEBAEKfont.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     .container {
       display: flex;
       flex-direction: column;
@@ -39,6 +53,7 @@
 
     .header-title, .header-creator {
       font-size: 30px;
+      font-family: 'TAEBAEKfont', sans-serif;
     }
 
     .header-creator {
@@ -73,38 +88,39 @@
     }
 
     .credits {
-      font-size: 14px;
+      font-size: 18px;
       color: gray;
       text-align: center;
+      font-family: 'TheJamsil5Bold', sans-serif;
     }
 
     .credits a {
-      text-decoration: none;
+      text-decoration: underline;
       color: inherit;
-      display: block;
+      display: inline;
     }
 
-    .credits a:hover {
-      text-decoration: underline;
+    .container a {
+      text-decoration: none;
+      color: inherit;
+      display: inline;
     }
   </style>
 </head>
 <body>
   <div class="container" id="container">
     <div class="credits">
-      <div style="text-align: center; font-size: 18px;">
-    <p style="display: inline-block; margin: 0;">
+      <p>
         이 사이트는 힙합LE 게시판에서 사용 가능한 유저 스티커를<br>
         모바일에서 편하게 즐길 수 있게 마련된 공간이에요.<br><br>
 
-        사용법은 <a href="https://hiphople.com/kboard/27064796?page=2" style="text-decoration: underline; color: inherit; display: inline;">힙합LE 게시판</a>에서 확인해봐 주세요.<br><br>
+        사용법은 <a href="https://hiphople.com/kboard/27064796?page=2">힙합LE 게시판</a>에서 확인해봐 주세요.<br><br>
 
         현재는 제가 만든 스티커만 있지만,<br>
-        여러분이 만든 스티커 20개를 <a href="mailto:younghalbae99@gmail.com" style="text-decoration: underline; color: inherit; display: inline;">제 메일</a>로 보내주시면 가끔씩 업데이트할게요.<br>
+        여러분이 만든 스티커 20개를 <a href="mailto:younghalbae99@gmail.com">제 메일</a>로 보내주시면 가끔씩 업데이트할게요.<br>
         스티커 보내실 때 함께 SNS나 LE 프로필 링크를 알려주시면,<br>
-        제작자 크레딧을 클릭하면 여러분의 멋진 세계로 이용자들을 초대할 수 있답니다. 참고해 주세요! 🌟<br>
-    </p>
-</div>
+        제작자 크레딧을 클릭하면 여러분의 멋진 세계로 이용자들을 초대할 수 있답니다. 참고해 주세요! 🌟
+      </p>
     </div>
   </div>
 
@@ -179,7 +195,7 @@
 
       navigator.clipboard.writeText(imageTag)
         .then(() => alert('Text copied: ' + imageTag))
-        .catch(() => alert('Error in copying text'));
+        .catch(() => alert('Error in copying text.catch(() => alert('Error in copying text'));
     }
 
     function toggleGridVisibility(grid, header) {
