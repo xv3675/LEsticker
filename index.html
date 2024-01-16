@@ -19,40 +19,42 @@
       gap: 10px;
       padding: 10px;
       border: 1px solid #ccc;
-      text-align: center; /* Center text */
+      text-align: center;
     }
 
     .header {
-      font-size: 30px; /* Adjust the font size as needed */
-      font-weight: bold; /* Optionally add bold font */
-      cursor: pointer; /* Add cursor pointer for clickable effect */
+      font-size: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
     }
 
     .header:hover {
-      text-decoration: underline; /* Add underline on hover for clickable effect */
+      text-decoration: underline;
     }
 
     .header-title {
-      font-size: 30px; /* Adjust the font size as needed */
+      font-size: 30px;
     }
 
     .header-creator {
-      font-size: 20px; /* Adjust the font size as needed */
+      font-size: 20px;
+      color: #555;
     }
 
     .header a {
-      text-decoration: none; /* Remove default link styling */
-      color: inherit; /* Inherit color from parent */
-      display: block; /* Make it a block element to take full width */
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
 
     .grid-container {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 5px;
-      max-height: 0; /* Initially hide the grid */
-      overflow: hidden; /* Hide the overflow content */
-      transition: max-height 0.3s ease; /* Add transition effect */
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
     }
 
     .grid-item img {
@@ -82,8 +84,8 @@
       return Array.from({ length: end - start + 1 }, (_, i) => `${base}/${start + i}.jpg`);
     }
 
-    function checkAndCreateImageGrid(containerId, start, imagesPerGrid, title, creator) {
-      const container = document.getElementById(containerId);
+    function checkAndCreateImageGrid(container, start, imagesPerGrid, title, creator, creatorLink) {
+      const containerElement = document.getElementById(container);
 
       const boxElement = document.createElement('div');
       boxElement.classList.add('box');
@@ -98,6 +100,7 @@
       const headerCreator = document.createElement('div');
       headerCreator.classList.add('header-creator');
       headerCreator.textContent = `by ${creator}`;
+      headerCreator.href = creatorLink;
 
       headerElement.appendChild(headerTitle);
       headerElement.appendChild(headerCreator);
@@ -109,14 +112,10 @@
       const texts = generateImageUrls('https://lesticker.netlify.app', start, start + imagesPerGrid - 1);
 
       const hasImages = images.some(image => {
-        // Check if the image exists in the storage
-        // In a real-world scenario, you might want to make a request to check image existence
-        // Here, we simulate the existence of an image based on the presence of '28.jpg'
         return image !== 'https://lesticker.netlify.app/28.jpg';
       });
 
       if (!hasImages) {
-        // Do not create the box if there are no images
         return;
       }
 
@@ -136,9 +135,8 @@
 
       boxElement.appendChild(headerElement);
       boxElement.appendChild(imageGrid);
-      container.appendChild(boxElement);
+      containerElement.appendChild(boxElement);
 
-      // Add click event listener for toggling the grid on header click
       headerElement.addEventListener('click', function() {
         const isGridVisible = imageGrid.style.maxHeight !== '0px';
         imageGrid.style.maxHeight = isGridVisible ? '0px' : `${imageGrid.scrollHeight}px`;
@@ -157,10 +155,9 @@
         });
     }
 
-    // Examples of creating dynamic boxes
-    checkAndCreateImageGrid('container', 1, 20, 'Korean Hip-hop Stickers', 'BeanieRooBongDari');
-    checkAndCreateImageGrid('container', 21, 7, 'Korean Hip-hop Stickers2', 'BeanieRooBongDari');
-    checkAndCreateImageGrid('container', 101, 8, 'International Hip-hop Stickers', 'BeanieRooBongDari');
+    checkAndCreateImageGrid('container', 1, 20, 'Korean Hip-hop Stickers', 'BeanieRooBongDari', 'https://creatorlink1.com');
+    checkAndCreateImageGrid('container', 21, 7, 'Korean Hip-hop Stickers2', 'BeanieRooBongDari', 'https://creatorlink2.com');
+    checkAndCreateImageGrid('container', 101, 8, 'International Hip-hop Stickers', 'BeanieRooBongDari', 'https://creatorlink3.com');
   </script>
 </body>
 </html>
