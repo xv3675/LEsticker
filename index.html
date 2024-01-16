@@ -30,6 +30,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
     }
 
     .header:hover {
@@ -44,6 +45,10 @@
       font-size: 20px;
       color: #555;
       cursor: pointer;
+    }
+
+    .header-creator:hover {
+      text-decoration: underline;
     }
 
     .header a {
@@ -84,11 +89,23 @@
   </div>
 
   <script>
+    const creators = {
+      BeanieRooBongDari: {
+        link: 'https://creatorlink1.com',
+        name: 'BeanieRooBongDari',
+      },
+      AnotherCreator: {
+        link: 'https://anothercreatorlink.com',
+        name: 'AnotherCreator',
+      },
+      // Add more creators as needed
+    };
+
     function generateImageUrls(base, start, end) {
       return Array.from({ length: end - start + 1 }, (_, i) => `${base}/${start + i}.jpg`);
     }
 
-    function checkAndCreateImageGrid(container, start, imagesPerGrid, title, creator, creatorLink) {
+    function checkAndCreateImageGrid(container, start, imagesPerGrid, title, creator) {
       const containerElement = document.getElementById(container);
 
       const boxElement = document.createElement('div');
@@ -103,10 +120,10 @@
 
       const headerCreator = document.createElement('div');
       headerCreator.classList.add('header-creator');
-      headerCreator.textContent = `by ${creator}`;
+      headerCreator.textContent = `by ${creator.name}`;
       headerCreator.addEventListener('click', function(event) {
         event.stopPropagation();
-        window.location.href = creatorLink;
+        window.location.href = creator.link;
       });
 
       headerElement.appendChild(headerTitle);
@@ -144,7 +161,7 @@
       boxElement.appendChild(imageGrid);
       containerElement.appendChild(boxElement);
 
-      headerElement.addEventListener('click', function() {
+      headerTitle.addEventListener('click', function() {
         const isGridVisible = imageGrid.style.maxHeight !== '0px';
         imageGrid.style.maxHeight = isGridVisible ? '0px' : `${imageGrid.scrollHeight}px`;
       });
@@ -162,9 +179,9 @@
         });
     }
 
-    checkAndCreateImageGrid('container', 1, 20, 'Korean Hip-hop Stickers', 'BeanieRooBongDari', 'https://creatorlink1.com');
-    checkAndCreateImageGrid('container', 21, 7, 'Korean Hip-hop Stickers2', 'BeanieRooBongDari', 'https://creatorlink2.com');
-    checkAndCreateImageGrid('container', 101, 8, 'International Hip-hop Stickers', 'BeanieRooBongDari', 'https://creatorlink3.com');
+    checkAndCreateImageGrid('container', 1, 20, 'Korean Hip-hop Stickers', creators.BeanieRooBongDari);
+    checkAndCreateImageGrid('container', 21, 7, 'Korean Hip-hop Stickers2', creators.BeanieRooBongDari);
+    checkAndCreateImageGrid('container', 101, 8, 'International Hip-hop Stickers', creators.AnotherCreator);
   </script>
 </body>
 </html>
