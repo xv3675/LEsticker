@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>LESticker Collection</title>
   <style>
-    /* CSS styling */
     .container {
       display: flex;
       flex-direction: column;
@@ -40,117 +39,83 @@
 </head>
 <body>
   <div class="container">
-    <!-- First box -->
     <div class="box">
       <h1 id="title1">Korean Hip-hop Stickers</h1>
       <p id="creator1">Created by BeanieRooBongDari</p>
       <div class="grid-container" id="imageGrid1">
-        <!-- Add images and text dynamically -->
       </div>
     </div>
-
-    <!-- Second box -->
     <div class="box">
       <h1 id="title2">International Hip-hop Stickers</h1>
       <p id="creator2">Created by BeanieRooBongDari</p>
       <div class="grid-container" id="imageGrid2">
-        <!-- Add images and text dynamically -->
       </div>
     </div>
-
-    <!-- Additional boxes... -->
-
     <div class="credits">
       <p>Accepting submissions for high-quality user-made stickers.</p>
       <a href="https://hiphople.com/kboard/27064796?page=2">Usage Instructions</a>
     </div>
   </div>
-
   <script>
-    // Images and text information for the first box
     const images1 = [];
     for (let i = 1; i <= 27; i++) {
-      images1.push(`${i}.jpg`);
+      images1.push(`https://lesticker.netlify.app/${i}.jpg`);
     }
-    const baseUrl = 'https://hiphople.com';
     const texts1 = [
-      `${baseUrl}/files/attach/images/2531590/584/026/027/51a6352b4604cc151ba5f8120222de95.jpg`,
       // Add more text entries
     ];
-
-    // Images and text information for the second box
     const images2 = [];
     for (let i = 101; i <= 110; i++) {
-      images2.push(`${i}.jpg`);
+      images2.push(`https://lesticker.netlify.app/${i}.jpg`);
     }
     const texts2 = [
-      `${baseUrl}/files/attach/images/2531590/495/064/027/388a8a858a26bab258232fafd3e68ee6.png`,
       // Add more text entries
     ];
-
-    // Function to dynamically add images and text for the first box
     function createImageGrid1() {
       const imageGrid = document.getElementById('imageGrid1');
       const titleElement = document.getElementById('title1');
       const creatorElement = document.getElementById('creator1');
-
       for (let i = 0; i < images1.length; i++) {
         const gridItem = document.createElement('div');
         gridItem.classList.add('grid-item');
-
         const img = document.createElement('img');
         img.src = images1[i];
         img.onclick = function() {
           copyText(texts1[i]);
         };
-
         gridItem.appendChild(img);
         imageGrid.appendChild(gridItem);
       }
-
       titleElement.textContent = 'Korean Hip-hop Stickers';
       creatorElement.textContent = 'Created by BeanieRooBongDari';
     }
-
-    // Function to dynamically add images and text for the second box
     function createImageGrid2() {
       const imageGrid = document.getElementById('imageGrid2');
       const titleElement = document.getElementById('title2');
       const creatorElement = document.getElementById('creator2');
-
       for (let i = 0; i < images2.length; i++) {
         const gridItem = document.createElement('div');
         gridItem.classList.add('grid-item');
-
         const img = document.createElement('img');
         img.src = images2[i];
         img.onclick = function() {
           copyText(texts2[i]);
         };
-
         gridItem.appendChild(img);
         imageGrid.appendChild(gridItem);
       }
-
       titleElement.textContent = 'International Hip-hop Stickers';
       creatorElement.textContent = 'Created by BeanieRooBongDari';
     }
-
-    // Generate image grids on page load
     createImageGrid1();
     createImageGrid2();
-
-    // Function to copy text
     function copyText(text) {
       const imageTag = `<a href="https://hiphople.com/kboard/27064796?page=2"><img src="${text}" style="border-radius:5px;" width="130px" height="130px"></a>`;
-
       navigator.clipboard.writeText(imageTag)
         .then(() => {
-          console.log('Text copied:', imageTag);
           alert('Text copied: ' + imageTag);
         })
         .catch(err => {
-          console.error('Error in copying text: ', err);
           alert('Error in copying text');
         });
     }
