@@ -38,23 +38,7 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- First box -->
-    <div class="box" id="box1">
-      <h1 id="title1">Korean Hip-hop Stickers</h1>
-      <p id="creator1">Created by BeanieRooBongDari</p>
-      <div class="grid-container" id="imageGrid1">
-      </div>
-    </div>
-
-    <!-- Second box -->
-    <div class="box" id="box2">
-      <h1 id="title2">International Hip-hop Stickers</h1>
-      <p id="creator2">Created by BeanieRooBongDari</p>
-      <div class="grid-container" id="imageGrid2">
-      </div>
-    </div>
-
+  <div class="container" id="container">
     <div class="credits">
       <p>Accepting submissions for high-quality user-made stickers.</p>
       <a href="https://hiphople.com/kboard/27064796?page=2">Usage Instructions</a>
@@ -66,11 +50,19 @@
       return Array.from({ length: end - start + 1 }, (_, i) => `${base}/${start + i}.jpg`);
     }
 
-    function checkAndCreateImageGrid(boxId, titleId, creatorId, imageGridId, start, imagesPerGrid) {
-      const boxElement = document.getElementById(boxId);
-      const titleElement = document.getElementById(titleId);
-      const creatorElement = document.getElementById(creatorId);
-      const imageGrid = document.getElementById(imageGridId);
+    function checkAndCreateImageGrid(containerId, start, imagesPerGrid, title, creator) {
+      const container = document.getElementById(containerId);
+
+      const boxElement = document.createElement('div');
+      boxElement.classList.add('box');
+      
+      const headerElement = document.createElement('div');
+      headerElement.classList.add('header');
+      headerElement.dataset.title = title;
+      headerElement.dataset.creator = creator;
+
+      const imageGrid = document.createElement('div');
+      imageGrid.classList.add('grid-container');
 
       const images = generateImageUrls('https://lesticker.netlify.app', start, start + imagesPerGrid - 1);
       const texts = generateImageUrls('https://lesticker.netlify.app', start, start + imagesPerGrid - 1);
@@ -83,8 +75,7 @@
       });
 
       if (!hasImages) {
-        // Do not display the box if there are no images
-        boxElement.style.display = 'none';
+        // Do not create the box if there are no images
         return;
       }
 
@@ -102,8 +93,9 @@
         imageGrid.appendChild(gridItem);
       }
 
-      titleElement.textContent = `Stickers ${start}-${start + imagesPerGrid - 1}`;
-      creatorElement.textContent = 'Created by BeanieRooBongDari';
+      boxElement.appendChild(headerElement);
+      boxElement.appendChild(imageGrid);
+      container.appendChild(boxElement);
     }
 
     function copyText(text) {
@@ -118,8 +110,9 @@
         });
     }
 
-    checkAndCreateImageGrid('box1', 'title1', 'creator1', 'imageGrid1', 1, 20);
-    checkAndCreateImageGrid('box2', 'title2', 'creator2', 'imageGrid2', 101, 20);
+    // Examples of creating dynamic boxes
+    checkAndCreateImageGrid('container', 1, 20, 'Korean Hip-hop Stickers', 'BeanieRooBongDari');
+    checkAndCreateImageGrid('container', 101, 20, 'International Hip-hop Stickers', 'BeanieRooBongDari');
   </script>
 </body>
 </html>
