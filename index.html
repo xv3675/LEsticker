@@ -32,8 +32,15 @@
       text-decoration: underline; /* Add underline on hover for clickable effect */
     }
 
-    .header a {
+    .header-title {
+      font-size: 30px; /* Adjust the font size as needed */
+    }
+
+    .header-creator {
       font-size: 20px; /* Adjust the font size as needed */
+    }
+
+    .header a {
       text-decoration: none; /* Remove default link styling */
       color: inherit; /* Inherit color from parent */
       display: block; /* Make it a block element to take full width */
@@ -83,7 +90,17 @@
       
       const headerElement = document.createElement('div');
       headerElement.classList.add('header');
-      headerElement.innerHTML = `<a>${title} by ${creator}</a>`;
+
+      const headerTitle = document.createElement('div');
+      headerTitle.classList.add('header-title');
+      headerTitle.textContent = title;
+
+      const headerCreator = document.createElement('div');
+      headerCreator.classList.add('header-creator');
+      headerCreator.textContent = `by ${creator}`;
+
+      headerElement.appendChild(headerTitle);
+      headerElement.appendChild(headerCreator);
 
       const imageGrid = document.createElement('div');
       imageGrid.classList.add('grid-container');
