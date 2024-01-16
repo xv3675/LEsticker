@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="kor">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>LESticker Collection</title>
@@ -39,93 +39,69 @@
 </head>
 <body>
   <div class="container">
+    <!-- ì²« ë²ì§¸ box -->
     <div class="box">
-      <h1 id="title1">êµ­ë´ íí© ì¤í°ì»¤</h1>
-      <p id="creator1">Created by ë¹ëë£¨ë´ë¤ë¦¬</p>
+      <h1 id="title1">Korean Hip-hop Stickers</h1>
+      <p id="creator1">Created by BeanieRooBongDari</p>
       <div class="grid-container" id="imageGrid1">
+        <!-- Images and text will be added dynamically -->
       </div>
     </div>
 
+    <!-- ë ë²ì§¸ box -->
     <div class="box">
-      <h1 id="title2">ì¸êµ­ íí© ì¤í°ì»¤</h1>
-      <p id="creator2">Created by ë¹ëë£¨ë´ë¤ë¦¬</p>
+      <h1 id="title2">International Hip-hop Stickers</h1>
+      <p id="creator2">Created by BeanieRooBongDari</p>
       <div class="grid-container" id="imageGrid2">
+        <!-- Images and text will be added dynamically -->
       </div>
     </div>
+
+    <!-- Additional boxes... -->
 
     <div class="credits">
-      <p>ê´ì°®ì ì ì  ì ì ì¤í°ì»¤ ì ë³´ ìí¨.</p>
-      <a href="https://hiphople.com/kboard/27064796?page=2">ì¬ì©ë²</a>
+      <p>Accepting submissions for user-created stickers.</p>
+      <a href="https://hiphople.com/kboard/27064796?page=2">How to Use</a>
     </div>
   </div>
 
   <script>
-    const images1 = [];
-    const texts1 = [];
-    
-    for (let i = 1; i <= 27; i++) {
-      images1.push(`${i}.jpg`);
-      texts1.push(`${baseUrl}/${i}.jpg`);
-    }
-
     const baseUrl = 'https://lesticker.netlify.app';
+    const images1 = Array.from({ length: 20 }, (_, i) => `${i + 1}.jpg`);
+    const texts1 = images1;
 
-    const images2 = [];
-    const texts2 = [];
+    const images2 = Array.from({ length: 20 }, (_, i) => `${i + 21}.jpg`);
+    const texts2 = images2;
 
-    for (let i = 101; i <= 110; i++) {
-        images2.push(`${i}.jpg`);
-        texts2.push(`${baseUrl}/${i}.jpg`);
-    }
+    function createImageGrid(containerId, images, texts, title, creator) {
+      const imageGrid = document.getElementById(containerId);
+      const titleElement = document.getElementById(title);
+      const creatorElement = document.getElementById(creator);
 
-    function createImageGrid1() {
-      const imageGrid = document.getElementById('imageGrid1');
-      const titleElement = document.getElementById('title1');
-      const creatorElement = document.getElementById('creator1');
-
-      for (let i = 0; i < images1.length; i++) {
+      for (let i = 0; i < images.length; i++) {
         const gridItem = document.createElement('div');
         gridItem.classList.add('grid-item');
 
         const img = document.createElement('img');
-        img.src = images1[i];
+        img.src = `${baseUrl}/${images[i]}`;
         img.onclick = function() {
-          copyText(texts1[i]);
+          copyText(`${baseUrl}/${texts[i]}`);
         };
 
         gridItem.appendChild(img);
         imageGrid.appendChild(gridItem);
       }
 
-      titleElement.textContent = 'êµ­ë´ íí© ì¤í°ì»¤';
-      creatorElement.textContent = 'Created by ë¹ëë£¨ë´ë¤ë¦¬';
+      titleElement.textContent = title.replace(/\d+/g, ''); // Remove numbers
+      creatorElement.textContent = creator.replace(/\d+/g, ''); // Remove numbers
     }
 
-    function createImageGrid2() {
-      const imageGrid = document.getElementById('imageGrid2');
-      const titleElement = document.getElementById('title2');
-      const creatorElement = document.getElementById('creator2');
-
-      for (let i = 0; i < images2.length; i++) {
-        const gridItem = document.createElement('div');
-        gridItem.classList.add('grid-item');
-
-        const img = document.createElement('img');
-        img.src = images2[i];
-        img.onclick = function() {
-          copyText(texts2[i]);
-        };
-
-        gridItem.appendChild(img);
-        imageGrid.appendChild(gridItem);
-      }
-
-      titleElement.textContent = 'ì¸êµ­ íí© ì¤í°ì»¤';
-      creatorElement.textContent = 'Created by ë¹ëë£¨ë´ë¤ë¦¬';
+    function createAllImageGrids() {
+      createImageGrid('imageGrid1', images1, texts1, 'title1', 'creator1');
+      createImageGrid('imageGrid2', images2, texts2, 'title2', 'creator2');
     }
 
-    createImageGrid1();
-    createImageGrid2();
+    createAllImageGrids();
 
     function copyText(text) {
       const imageTag = `<a href="https://hiphople.com/kboard/27064796?page=2"><img src="${text}" style="border-radius:5px;" width="130px" height="130px"></a>`;
