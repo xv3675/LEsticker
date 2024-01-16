@@ -39,84 +39,106 @@
 </head>
 <body>
   <div class="container">
+    <!-- First box -->
     <div class="box">
       <h1 id="title1">Korean Hip-hop Stickers</h1>
       <p id="creator1">Created by BeanieRooBongDari</p>
       <div class="grid-container" id="imageGrid1">
       </div>
     </div>
+
+    <!-- Second box -->
     <div class="box">
       <h1 id="title2">International Hip-hop Stickers</h1>
       <p id="creator2">Created by BeanieRooBongDari</p>
       <div class="grid-container" id="imageGrid2">
       </div>
     </div>
+
     <div class="credits">
       <p>Accepting submissions for high-quality user-made stickers.</p>
       <a href="https://hiphople.com/kboard/27064796?page=2">Usage Instructions</a>
     </div>
   </div>
+
   <script>
-    const images1 = [];
-    for (let i = 1; i <= 27; i++) {
-      images1.push(`https://lesticker.netlify.app/${i}.jpg`);
+    function generateImageUrls(base, start, end) {
+      return Array.from({ length: end - start + 1 }, (_, i) => `${base}/${start + i}.jpg`);
     }
-    const texts1 = Array.from({ length: 27 }, (_, i) => `https://lesticker.netlify.app/${i + 1}.jpg`);
-    
-    const images2 = [];
-    for (let i = 101; i <= 110; i++) {
-      images2.push(`https://lesticker.netlify.app/${i}.jpg`);
+
+    const imagesPerGrid = 20;
+
+    const images1 = generateImageUrls('https://lesticker.netlify.app', 1, imagesPerGrid);
+    const texts1 = generateImageUrls('https://lesticker.netlify.app', 1, imagesPerGrid);
+
+    const images2 = generateImageUrls('https://lesticker.netlify.app', 101, 100 + imagesPerGrid);
+    const texts2 = generateImageUrls('https://lesticker.netlify.app', 101, 100 + imagesPerGrid);
+
+    function createImageGrid(imageGrid, images, texts, titleId, creatorId, titleText, creatorText) {
+      const titleElement = document.getElementById(titleId);
+      const creatorElement = document.getElementById(creatorId);
+
+      if (images.length === 0) {
+        // Do not display the box if there are no images
+        imageGrid.parentNode.style.display = 'none';
+        return;
+      }
+
+      for (let i = 0; i < images.length; i++) {
+        const gridItem = document.createElement('div');
+        gridItem.classList.add('grid-item');
+
+        const img = document.createElement('img');
+        img.src = images[i];
+        img.onclick = function() {
+          copyText(texts[i]);
+        };
+
+        gridItem.appendChild(img);
+        imageGrid.appendChild(gridItem);
+      }
+
+      titleElement.textContent = titleText;
+      creatorElement.textContent = creatorText;
     }
-    const texts2 = Array.from({ length: 10 }, (_, i) => `https://lesticker.netlify.app/${i + 101}.jpg`);
-    
+
     function createImageGrid1() {
-      const imageGrid = document.getElementById('imageGrid1');
-      const titleElement = document.getElementById('title1');
-      const creatorElement = document.getElementById('creator1');
-      for (let i = 0; i < images1.length; i++) {
-        const gridItem = document.createElement('div');
-        gridItem.classList.add('grid-item');
-        const img = document.createElement('img');
-        img.src = images1[i];
-        img.onclick = function() {
-          copyText(texts1[i]);
-        };
-        gridItem.appendChild(img);
-        imageGrid.appendChild(gridItem);
-      }
-      titleElement.textContent = 'Korean Hip-hop Stickers';
-      creatorElement.textContent = 'Created by BeanieRooBongDari';
+      createImageGrid(
+        document.getElementById('imageGrid1'),
+        images1,
+        texts1,
+        'title1',
+        'creator1',
+        'Korean Hip-hop Stickers',
+        'Created by BeanieRooBongDari'
+      );
     }
+
     function createImageGrid2() {
-      const imageGrid = document.getElementById('imageGrid2');
-      const titleElement = document.getElementById('title2');
-      const creatorElement = document.getElementById('creator2');
-      for (let i = 0; i < images2.length; i++) {
-        const gridItem = document.createElement('div');
-        gridItem.classList.add('grid-item');
-        const img = document.createElement('img');
-        img.src = images2[i];
-        img.onclick = function() {
-          copyText(texts2[i]);
-        };
-        gridItem.appendChild(img);
-        imageGrid.appendChild(gridItem);
-      }
-      titleElement.textContent = 'International Hip-hop Stickers';
-      creatorElement.textContent = 'Created by BeanieRooBongDari';
+      createImageGrid(
+        document.getElementById('imageGrid2'),
+        images2,
+        texts2,
+        'title2',
+        'creator2',
+        'International Hip-hop Stickers',
+        'Created by BeanieRooBongDari'
+      );
     }
-    createImageGrid1();
-    createImageGrid2();
+
     function copyText(text) {
       const imageTag = `<a href="https://hiphople.com/kboard/27064796?page=2"><img src="${text}" style="border-radius:5px;" width="130px" height="130px"></a>`;
+
       navigator.clipboard.writeText(imageTag)
         .then(() => {
           alert('Text copied: ' + imageTag);
         })
-        .catch(err => {
-          alert('Error in copying text');
+        .catch(() => {alert('Error in copying text');
         });
     }
+
+    createImageGrid1();
+    createImageGrid2();
   </script>
 </body>
 </html>
