@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>LESticker Collection</title>
+  <title>힙합LE 스티커 컬렉션</title>
   <style>
     .container {
       display: flex;
@@ -37,12 +37,11 @@
       text-decoration: underline;
     }
 
-    .header-title {
+    .header-title, .header-creator {
       font-size: 30px;
     }
 
     .header-creator {
-      font-size: 20px;
       color: #555;
       cursor: pointer;
     }
@@ -74,38 +73,37 @@
 
     .credits {
       font-size: 14px;
-      color: #555;
-      text-align: center;
       color: gray;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <div class="container" id="container">
     <div class="credits">
-      <p>Accepting submissions for high-quality user-made stickers.</p>
-      <a href="https://hiphople.com/kboard/27064796?page=2">Usage Instructions</a>
+      <p>양질의 유저 제작 스티커 제보해주시면 시간나는대로 업데이트하겠습니다.</p>
+      <a href="https://hiphople.com/kboard/27064796?page=2">사용법</a>
     </div>
   </div>
 
   <script>
     const creators = {
-      BeanieRooBongDari: {
+      ë¹ëë£¨ë´ë¤ë¦¬: {
         link: 'https://creatorlink1.com',
-        name: 'BeanieRooBongDari',
+        name: '비니루봉다리',
       },
       AnotherCreator: {
         link: 'https://anothercreatorlink.com',
-        name: 'AnotherCreator',
+        name: '비니루봉다리',
       },
-      // Add more creators as needed
+      // íìí ë§í¼ ë ì¶ê°
     };
 
     function generateImageUrls(base, start, end) {
       return Array.from({ length: end - start + 1 }, (_, i) => `${base}/${start + i}.jpg`);
     }
 
-    function checkAndCreateImageGrid(container, start, imagesPerGrid, title, creator) {
+    function createImageGrid(container, start, imagesPerGrid, title, creator) {
       const containerElement = document.getElementById(container);
 
       const boxElement = document.createElement('div');
@@ -121,10 +119,7 @@
       const headerCreator = document.createElement('div');
       headerCreator.classList.add('header-creator');
       headerCreator.textContent = `by ${creator.name}`;
-      headerCreator.addEventListener('click', function(event) {
-        event.stopPropagation();
-        window.location.href = creator.link;
-      });
+      headerCreator.addEventListener('click', () => window.location.href = creator.link);
 
       headerElement.appendChild(headerTitle);
       headerElement.appendChild(headerCreator);
@@ -135,23 +130,13 @@
       const images = generateImageUrls('https://lesticker.netlify.app', start, start + imagesPerGrid - 1);
       const texts = generateImageUrls('https://lesticker.netlify.app', start, start + imagesPerGrid - 1);
 
-      const hasImages = images.some(image => {
-        return image !== 'https://lesticker.netlify.app/28.jpg';
-      });
-
-      if (!hasImages) {
-        return;
-      }
-
       for (let i = 0; i < images.length; i++) {
         const gridItem = document.createElement('div');
         gridItem.classList.add('grid-item');
 
         const img = document.createElement('img');
         img.src = images[i];
-        img.onclick = function() {
-          copyText(texts[i]);
-        };
+        img.onclick = () => copyText(texts[i]);
 
         gridItem.appendChild(img);
         imageGrid.appendChild(gridItem);
@@ -161,27 +146,27 @@
       boxElement.appendChild(imageGrid);
       containerElement.appendChild(boxElement);
 
-      headerTitle.addEventListener('click', function() {
-        const isGridVisible = imageGrid.style.maxHeight !== '0px';
-        imageGrid.style.maxHeight = isGridVisible ? '0px' : `${imageGrid.scrollHeight}px`;
-      });
+      headerTitle.addEventListener('click', () => toggleGridVisibility(imageGrid));
+      headerCreator.addEventListener('click', () => toggleGridVisibility(imageGrid));
     }
 
     function copyText(text) {
       const imageTag = `<a href="https://hiphople.com/kboard/27064796?page=2"><img src="${text}" style="border-radius:5px;" width="130px" height="130px"></a>`;
 
       navigator.clipboard.writeText(imageTag)
-        .then(() => {
-          alert('Text copied: ' + imageTag);
-        })
-        .catch(() => {
-          alert('Error in copying text');
-        });
+        .then(() => alert('Text copied: ' + imageTag))
+        .catch(() => alert('Error in copying text'));
     }
 
-    checkAndCreateImageGrid('container', 1, 20, 'Korean Hip-hop Stickers', creators.BeanieRooBongDari);
-    checkAndCreateImageGrid('container', 21, 7, 'Korean Hip-hop Stickers2', creators.BeanieRooBongDari);
-    checkAndCreateImageGrid('container', 101, 8, 'International Hip-hop Stickers', creators.AnotherCreator);
+    function toggleGridVisibility(grid) {
+      const isGridVisible = grid.style.maxHeight !== '0px';
+      grid.style.maxHeight = isGridVisible ? '0px' : `${grid.scrollHeight}px`;
+    }
+
+    // ì¬ì© ìì
+    createImageGrid('container', 1, 20, '국내힙합 스티커1', creators.비니루봉다리);
+    createImageGrid('container', 21, 7, '국내힙합 스티커2', creators.비니루봉다리);
+    createImageGrid('container', 101, 8, '외국힙합 스티커1', creators.비니루봉다리);
   </script>
 </body>
 </html>
