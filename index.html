@@ -40,7 +40,7 @@
 <body>
   <div class="container">
     <!-- First box -->
-    <div class="box">
+    <div class="box" id="box1">
       <h1 id="title1">Korean Hip-hop Stickers</h1>
       <p id="creator1">Created by BeanieRooBongDari</p>
       <div class="grid-container" id="imageGrid1">
@@ -48,7 +48,7 @@
     </div>
 
     <!-- Second box -->
-    <div class="box">
+    <div class="box" id="box2">
       <h1 id="title2">International Hip-hop Stickers</h1>
       <p id="creator2">Created by BeanieRooBongDari</p>
       <div class="grid-container" id="imageGrid2">
@@ -66,21 +66,25 @@
       return Array.from({ length: end - start + 1 }, (_, i) => `${base}/${start + i}.jpg`);
     }
 
-    const imagesPerGrid = 20;
-
-    const images1 = generateImageUrls('https://lesticker.netlify.app', 1, imagesPerGrid);
-    const texts1 = generateImageUrls('https://lesticker.netlify.app', 1, imagesPerGrid);
-
-    const images2 = generateImageUrls('https://lesticker.netlify.app', 101, 100 + imagesPerGrid);
-    const texts2 = generateImageUrls('https://lesticker.netlify.app', 101, 100 + imagesPerGrid);
-
-    function createImageGrid(imageGrid, images, texts, titleId, creatorId, titleText, creatorText) {
+    function checkAndCreateImageGrid(boxId, titleId, creatorId, imageGridId, start, imagesPerGrid) {
+      const boxElement = document.getElementById(boxId);
       const titleElement = document.getElementById(titleId);
       const creatorElement = document.getElementById(creatorId);
+      const imageGrid = document.getElementById(imageGridId);
 
-      if (images.length === 0) {
+      const images = generateImageUrls('https://lesticker.netlify.app', start, start + imagesPerGrid - 1);
+      const texts = generateImageUrls('https://lesticker.netlify.app', start, start + imagesPerGrid - 1);
+
+      const hasImages = images.some(image => {
+        // Check if the image exists in the storage
+        // In a real-world scenario, you might want to make a request to check image existence
+        // Here, we simulate the existence of an image based on the presence of '28.jpg'
+        return image !== 'https://lesticker.netlify.app/28.jpg';
+      });
+
+      if (!hasImages) {
         // Do not display the box if there are no images
-        imageGrid.parentNode.style.display = 'none';
+        boxElement.style.display = 'none';
         return;
       }
 
@@ -98,32 +102,8 @@
         imageGrid.appendChild(gridItem);
       }
 
-      titleElement.textContent = titleText;
-      creatorElement.textContent = creatorText;
-    }
-
-    function createImageGrid1() {
-      createImageGrid(
-        document.getElementById('imageGrid1'),
-        images1,
-        texts1,
-        'title1',
-        'creator1',
-        'Korean Hip-hop Stickers',
-        'Created by BeanieRooBongDari'
-      );
-    }
-
-    function createImageGrid2() {
-      createImageGrid(
-        document.getElementById('imageGrid2'),
-        images2,
-        texts2,
-        'title2',
-        'creator2',
-        'International Hip-hop Stickers',
-        'Created by BeanieRooBongDari'
-      );
+      titleElement.textContent = `Stickers ${start}-${start + imagesPerGrid - 1}`;
+      creatorElement.textContent = 'Created by BeanieRooBongDari';
     }
 
     function copyText(text) {
@@ -133,12 +113,13 @@
         .then(() => {
           alert('Text copied: ' + imageTag);
         })
-        .catch(() => {alert('Error in copying text');
+        .catch(() => {
+          alert('Error in copying text');
         });
     }
 
-    createImageGrid1();
-    createImageGrid2();
+    checkAndCreateImageGrid('box1', 'title1', 'creator1', 'imageGrid1', 1, 20);
+    checkAndCreateImageGrid('box2', 'title2', 'creator2', 'imageGrid2', 101, 20);
   </script>
 </body>
 </html>
