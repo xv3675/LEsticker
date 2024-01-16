@@ -20,13 +20,23 @@
       padding: 10px;
       border: 1px solid #ccc;
       text-align: center; /* Center text */
-      overflow: hidden; /* Hide content that overflows */
     }
 
     .header {
       font-size: 30px; /* Adjust the font size as needed */
       font-weight: bold; /* Optionally add bold font */
-      cursor: pointer; /* Add pointer cursor for clickable effect */
+      cursor: pointer; /* Add cursor pointer for clickable effect */
+    }
+
+    .header:hover {
+      text-decoration: underline; /* Add underline on hover for clickable effect */
+    }
+
+    .header a {
+      font-size: 20px; /* Adjust the font size as needed */
+      text-decoration: none; /* Remove default link styling */
+      color: inherit; /* Inherit color from parent */
+      display: block; /* Make it a block element to take full width */
     }
 
     .grid-container {
@@ -34,8 +44,8 @@
       grid-template-columns: repeat(5, 1fr);
       gap: 5px;
       max-height: 0; /* Initially hide the grid */
-      overflow: hidden; /* Hide content that overflows */
-      transition: max-height 0.3s ease-out; /* Add smooth transition effect */
+      overflow: hidden; /* Hide the overflow content */
+      transition: max-height 0.3s ease; /* Add transition effect */
     }
 
     .grid-item img {
@@ -73,7 +83,7 @@
       
       const headerElement = document.createElement('div');
       headerElement.classList.add('header');
-      headerElement.textContent = `${title} by ${creator}`;
+      headerElement.innerHTML = `<a>${title} by ${creator}</a>`;
 
       const imageGrid = document.createElement('div');
       imageGrid.classList.add('grid-container');
@@ -111,13 +121,10 @@
       boxElement.appendChild(imageGrid);
       container.appendChild(boxElement);
 
-      // Add click event to toggle the grid visibility
+      // Add click event listener for toggling the grid on header click
       headerElement.addEventListener('click', function() {
-        if (imageGrid.style.maxHeight) {
-          imageGrid.style.maxHeight = null; // Close the grid
-        } else {
-          imageGrid.style.maxHeight = imageGrid.scrollHeight + 'px'; // Open the grid
-        }
+        const isGridVisible = imageGrid.style.maxHeight !== '0px';
+        imageGrid.style.maxHeight = isGridVisible ? '0px' : `${imageGrid.scrollHeight}px`;
       });
     }
 
