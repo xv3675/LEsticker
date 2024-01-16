@@ -11,6 +11,7 @@
       gap: 20px;
       padding: 20px;
     }
+
     .box {
       display: flex;
       flex-direction: column;
@@ -18,17 +19,26 @@
       gap: 10px;
       padding: 10px;
       border: 1px solid #ccc;
+      text-align: center; /* Center text */
     }
+
+    .header {
+      font-size: 18px; /* Adjust the font size as needed */
+      font-weight: bold; /* Optionally add bold font */
+    }
+
     .grid-container {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 5px;
     }
+
     .grid-item img {
       width: 100%;
       height: auto;
       cursor: pointer;
     }
+
     .credits {
       font-size: 14px;
       color: #555;
@@ -110,7 +120,7 @@
     }
 
     // Examples of creating dynamic boxes
-    checkAndCreateImageGrid('container', 1, 20, 'Korean Hip-hop Stickers', 'BeanieRooBongDari');
+    checkAndCreateImageGrid('container', 1, 20, 'Korean Hip-hop Stickers', 'BeanieRooBongDari);
     checkAndCreateImageGrid('container', 21, 7, 'Korean Hip-hop Stickers2', 'BeanieRooBongDari');
     checkAndCreateImageGrid('container', 101, 8, 'International Hip-hop Stickers', 'BeanieRooBongDari');
   </script>
