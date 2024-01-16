@@ -23,8 +23,12 @@
     }
 
     .header {
-      font-size: 30px; /* Adjust the font size as needed */
-      font-weight: bold; /* Optionally add bold font */
+      font-size: 30px; /* ì ëª© í°í¸ í¬ê¸° */
+      font-weight: bold; /* ì ëª© ë³¼ë ì²ë¦¬ */
+    }
+
+    .subtitle {
+      font-size: 20px; /* ì ìì í°í¸ í¬ê¸° */
     }
 
     .grid-container {
@@ -68,7 +72,11 @@
       
       const headerElement = document.createElement('div');
       headerElement.classList.add('header');
-      headerElement.textContent = `${title} by ${creator}`;
+      headerElement.textContent = title;
+
+      const subtitleElement = document.createElement('div');
+      subtitleElement.classList.add('subtitle');
+      subtitleElement.textContent = `by ${creator}`;
 
       const imageGrid = document.createElement('div');
       imageGrid.classList.add('grid-container');
@@ -77,14 +85,10 @@
       const texts = generateImageUrls('https://lesticker.netlify.app', start, start + imagesPerGrid - 1);
 
       const hasImages = images.some(image => {
-        // Check if the image exists in the storage
-        // In a real-world scenario, you might want to make a request to check image existence
-        // Here, we simulate the existence of an image based on the presence of '28.jpg'
         return image !== 'https://lesticker.netlify.app/28.jpg';
       });
 
       if (!hasImages) {
-        // Do not create the box if there are no images
         return;
       }
 
@@ -103,6 +107,7 @@
       }
 
       boxElement.appendChild(headerElement);
+      boxElement.appendChild(subtitleElement);
       boxElement.appendChild(imageGrid);
       container.appendChild(boxElement);
     }
