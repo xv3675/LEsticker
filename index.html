@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>LESticker Collection</title>
   <style>
-    /* CSS 스타일링 */
     .container {
       display: flex;
       flex-direction: column;
@@ -33,59 +32,52 @@
     .credits {
       font-size: 14px;
       color: #555;
-      text-align: center
+      text-align: center;
       color: gray;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <!-- 첫 번째 box -->
     <div class="box">
-      <h1 id="title1">국내 힙합 스티커</h1>
-      <p id="creator1">Created by 비니루봉다리</p>
+      <h1 id="title1">êµ­ë´ íí© ì¤í°ì»¤</h1>
+      <p id="creator1">Created by ë¹ëë£¨ë´ë¤ë¦¬</p>
       <div class="grid-container" id="imageGrid1">
-        <!-- 이미지와 텍스트 추가 -->
       </div>
     </div>
 
-    <!-- 두 번째 box -->
     <div class="box">
-      <h1 id="title2">외국 힙합 스티커</h1>
-      <p id="creator2">Created by 비니루봉다리</p>
+      <h1 id="title2">ì¸êµ­ íí© ì¤í°ì»¤</h1>
+      <p id="creator2">Created by ë¹ëë£¨ë´ë¤ë¦¬</p>
       <div class="grid-container" id="imageGrid2">
-        <!-- 이미지와 텍스트 추가 -->
       </div>
     </div>
-
-    <!-- 추가적인 박스들... -->
 
     <div class="credits">
-      <p>괜찮은 유저 제작 스티커 제보 원함.</p>
-      <a href="https://hiphople.com/kboard/27064796?page=2">사용법</a>
+      <p>ê´ì°®ì ì ì  ì ì ì¤í°ì»¤ ì ë³´ ìí¨.</p>
+      <a href="https://hiphople.com/kboard/27064796?page=2">ì¬ì©ë²</a>
     </div>
   </div>
 
   <script>
-    // 첫 번째 box의 이미지 및 텍스트 정보
-// ì²« ë²ì§¸ boxì ì´ë¯¸ì§ ë° íì¤í¸ ì ë³´
-const images1 = [];
-const texts1 = [];  // ì¶ê°ë ë¶ë¶
+    const images1 = [];
+    const texts1 = [];
+    
+    for (let i = 1; i <= 27; i++) {
+      images1.push(`${i}.jpg`);
+      texts1.push(`${baseUrl}/${i}.jpg`);
+    }
 
-for (let i = 1; i <= 27; i++) {
-  images1.push(`${i}.jpg`);
-  texts1.push(`íì¤í¸${i}`);  // ì´ë¯¸ì§ì ëìíë íì¤í¸ ì¶ê°
-}
+    const baseUrl = 'https://lesticker.netlify.app';
 
-const baseUrl = 'https://lesticker.netlify.app';
+    const images2 = [];
+    const texts2 = [];
 
-const images2 = [];
-const texts2 = [];  // ì¶ê°ë ë¶ë¶
+    for (let i = 101; i <= 110; i++) {
+        images2.push(`${i}.jpg`);
+        texts2.push(`${baseUrl}/${i}.jpg`);
+    }
 
-for (let i = 101; i <= 110; i++) {
-    images2.push(`${i}.jpg`);
-    texts2.push(`íì¤í¸${i}`);  // ì´ë¯¸ì§ì ëìíë íì¤í¸ ì¶ê°
-}    // 첫 번째 box의 이미지와 텍스트를 동적으로 추가하는 함수
     function createImageGrid1() {
       const imageGrid = document.getElementById('imageGrid1');
       const titleElement = document.getElementById('title1');
@@ -105,11 +97,10 @@ for (let i = 101; i <= 110; i++) {
         imageGrid.appendChild(gridItem);
       }
 
-      titleElement.textContent = '국내 힙합 스티커';
-      creatorElement.textContent = 'Created by 비니루봉다리';
+      titleElement.textContent = 'êµ­ë´ íí© ì¤í°ì»¤';
+      creatorElement.textContent = 'Created by ë¹ëë£¨ë´ë¤ë¦¬';
     }
 
-    // 두 번째 box의 이미지와 텍스트를 동적으로 추가하는 함수
     function createImageGrid2() {
       const imageGrid = document.getElementById('imageGrid2');
       const titleElement = document.getElementById('title2');
@@ -129,28 +120,26 @@ for (let i = 101; i <= 110; i++) {
         imageGrid.appendChild(gridItem);
       }
 
-      titleElement.textContent = '외국 힙합 스티커';
-      creatorElement.textContent = 'Created by 비니루봉다리';
+      titleElement.textContent = 'ì¸êµ­ íí© ì¤í°ì»¤';
+      creatorElement.textContent = 'Created by ë¹ëë£¨ë´ë¤ë¦¬';
     }
 
-    // 페이지 로드 시 이미지 그리드 생성
     createImageGrid1();
     createImageGrid2();
 
-    // 텍스트 복사 함수
-// íì¤í¸ ë³µì¬ í¨ì
-function copyText(text) {
-  const imageTag = `<a href="https://hiphople.com/kboard/27064796?page=2"><img src="${text}" style="border-radius:5px;" width="130px" height="130px"></a>`;
+    function copyText(text) {
+      const imageTag = `<a href="https://hiphople.com/kboard/27064796?page=2"><img src="${text}" style="border-radius:5px;" width="130px" height="130px"></a>`;
 
-  navigator.clipboard.writeText(imageTag)
-    .then(() => {
-      console.log('Text copied:', imageTag);
-      alert('Text copied:\n' + imageTag);
-    })
-    .catch(err => {
-      console.error('Error in copying text: ', err);
-      alert('Error in copying text');
-    });
-}  </script>
+      navigator.clipboard.writeText(imageTag)
+        .then(() => {
+          console.log('Text copied:', imageTag);
+          alert('Text copied:\n' + imageTag);
+        })
+        .catch(err => {
+          console.error('Error in copying text: ', err);
+          alert('Error in copying text');
+        });
+    }
+  </script>
 </body>
 </html>
