@@ -68,17 +68,24 @@
 
   <script>
     // 첫 번째 box의 이미지 및 텍스트 정보
-    const images1 = [];
-    for (let i = 1; i <= 27; i++) {
-      images1.push(`${i}.jpg`);
-    }
-    const baseUrl = 'https://hiphople.com';
-    
-    const images2 = [];
-    for (let i = 101; i <= 110; i++) {
-        images2.push(`${i}.jpg`);
-    }
-    // 첫 번째 box의 이미지와 텍스트를 동적으로 추가하는 함수
+// ì²« ë²ì§¸ boxì ì´ë¯¸ì§ ë° íì¤í¸ ì ë³´
+const images1 = [];
+const texts1 = [];  // ì¶ê°ë ë¶ë¶
+
+for (let i = 1; i <= 27; i++) {
+  images1.push(`${i}.jpg`);
+  texts1.push(`íì¤í¸${i}`);  // ì´ë¯¸ì§ì ëìíë íì¤í¸ ì¶ê°
+}
+
+const baseUrl = 'https://lesticker.netlify.app';
+
+const images2 = [];
+const texts2 = [];  // ì¶ê°ë ë¶ë¶
+
+for (let i = 101; i <= 110; i++) {
+    images2.push(`${i}.jpg`);
+    texts2.push(`íì¤í¸${i}`);  // ì´ë¯¸ì§ì ëìíë íì¤í¸ ì¶ê°
+}    // 첫 번째 box의 이미지와 텍스트를 동적으로 추가하는 함수
     function createImageGrid1() {
       const imageGrid = document.getElementById('imageGrid1');
       const titleElement = document.getElementById('title1');
